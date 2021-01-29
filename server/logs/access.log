@@ -1,0 +1,3 @@
+2020-06-03 09:58:09:589 info: Method: GET | To: /api/test/test | Query: {}
+2021-01-29 13:33:43:3343 info: Method: GET | To: /discovery | Query: {}
+2021-01-29 13:33:43:3343 info: Method: GET | To: /favicon.ico | Query: {}
