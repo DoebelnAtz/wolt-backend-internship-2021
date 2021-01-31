@@ -1,6 +1,6 @@
 import { RequestHandler } from 'express';
 import { validationResult } from 'express-validator';
-import Index from '../customError';
+import CustomError from '../CustomError';
 
 export const catchErrors = (
 	requestHandler: RequestHandler,
@@ -11,7 +11,7 @@ export const catchErrors = (
 		if (!errors.isEmpty()) {
 			console.log(errors);
 			return next(
-				new Index(
+				new CustomError(
 					`${errorMessage}: invalid input`,
 					422,
 					'Invalid input',
@@ -22,7 +22,7 @@ export const catchErrors = (
 			return await requestHandler(req, res, next);
 		} catch (error) {
 			return next(
-				new Index(
+				new CustomError(
 					error.response?.length ? error.response : errorMessage,
 					error.status || 500,
 					error.description || error,

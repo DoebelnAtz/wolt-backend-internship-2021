@@ -1,0 +1,12 @@
+2021-01-29 14:35:55:3555 error: 500: Error | code: 0
+2021-01-29 14:36:40:3640 error: 500: Error | code: 0
+2021-01-29 14:37:23:3723 error: 500: Error | code: 0
+2021-01-29 14:37:56:3756 error: 500: Error | code: 0
+2021-01-29 14:37:57:3757 error: 500: Error | code: 0
+2021-01-29 14:38:32:3832 error: 500: Error | code: 0
+2021-01-29 14:48:07:487 error: 400: Request contained multiple occurances of parameter | code: 0
+2021-01-29 14:48:30:4830 error: 400: Request contained multiple occurances of parameter | code: 0
+2021-01-29 14:59:27:5927 error: 400: Request contained multiple occurances of parameter | code: 0
+2021-01-29 14:59:40:5940 error: 400: Request contained multiple occurances of parameter | code: 0
+2021-01-29 15:47:54:4754 error: 500: TypeError: restaurants.filter is not a function | code: 0
+2021-01-29 18:11:10:1110 error: 400: Longitude parameter exceeded the range of longitude | code: 0
