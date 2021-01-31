@@ -61,7 +61,7 @@ export const sortPopular = (restaurants: Restaurant[]) =>
 export const sortNew = (restaurants: Restaurant[]) => {
 
     let limit = new Date();
-    limit.setMonth(limit.getMonth() - 4);
+    limit.setMonth(limit.getMonth() - 1);
 
     return restaurants
         .sort(

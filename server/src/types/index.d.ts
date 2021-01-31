@@ -7,3 +7,8 @@ export interface Restaurant {
     popularity: number
     distance?: number
 }
+
+export interface Section {
+    title: string
+    restaurants: Restaurant[]
+}

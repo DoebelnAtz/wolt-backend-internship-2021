@@ -1,7 +1,7 @@
 import {catchErrors} from "../errors/catchErrors";
 import {calcDistance, limitToOnline, sortNearby, sortNew, sortPopular, validateParameters} from "../utils";
 import CustomError from "../errors/CustomError";
-import {Restaurant} from "../types";
+import {Restaurant, Section} from "../types";
 
 let { restaurants } = require('../../restaurants.json');
 export const discovery = catchErrors(async (req, res) => {
@@ -22,7 +22,7 @@ export const discovery = catchErrors(async (req, res) => {
     validateParameters(lat, lon);
 
     // copy restaurants closer than 1.5km to a new array
-    const filterNearby: Restaurant[] = [];
+    const filteredNearby: Restaurant[] = [];
 
     restaurants.forEach((restaurant: any) => {
         let dist = calcDistance(
@@ -37,28 +37,33 @@ export const discovery = catchErrors(async (req, res) => {
         // not sure if this is more effective, I omit it in limitToOnline()
 
         if (dist < 1.5)
-            filterNearby.push({...restaurant, distance: dist});
+            filteredNearby.push({...restaurant, distance: dist});
     }
     );
 
-    const popularRestaurants = limitToOnline(sortPopular(filterNearby));
-    const newRestaurants = limitToOnline(sortNew(filterNearby));
-    const nearbyRestaurants = limitToOnline(sortNearby(filterNearby));
+    const popularRestaurants = limitToOnline(sortPopular(filteredNearby));
+    const newRestaurants = limitToOnline(sortNew(filteredNearby));
+    const nearbyRestaurants = limitToOnline(sortNearby(filteredNearby));
+
+    const sections: Section[] = [
+        {
+            title: 'Popular Restaurants',
+            restaurants: popularRestaurants
+        },
+        {
+            title: 'New Restaurants',
+            restaurants: newRestaurants
+        },
+        {
+            title: 'Nearby Restaurants',
+            restaurants: nearbyRestaurants
+        }
+    ];
 
     res.json({
-        sections: [
-            {
-                title: 'Popular Restaurants',
-                restaurants: popularRestaurants
-            },
-            {
-                title: 'New Restaurants',
-                restaurants: newRestaurants
-            },
-            {
-                title: 'Nearby Restaurants',
-                restaurants: nearbyRestaurants
-            }
-            ]
+        sections: sections.filter(section =>
+            !!section.restaurants.length
+        )
+
     });
 }, 'Failed to get discovery');
